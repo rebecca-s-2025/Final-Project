@@ -1,0 +1,110 @@
+{% extends 'base_general.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+  .errorlist li {
+    color: red !important;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+  {% include "header.html" %}
+
+  <!-- ==== banner section start ==== -->
+  <section class="common-banner">
+    <div class="container">
+       <div class="row">
+          <div class="col-12">
+             <div class="common-banner__content text-center">
+                <h2 class="title-animation">Request a New Textbook</h2>
+             </div>
+          </div>
+       </div>
+    </div>
+    <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item">
+           <a href="{% url 'home' %}">Home</a>
+         </li>
+         <li class="breadcrumb-item">
+           <a href="{% url 'list_textbooks_requests' %}">Textbook Requests</a>
+         </li>
+         <li class="breadcrumb-item active" aria-current="page">
+           Request a New Textbook
+         </li>
+       </ol>
+    </nav>
+    <div class="banner-bg">
+      <img src="{% static 'images/banner/textbook-request-banner-bg.jpg' %}" alt="Image">
+    </div>
+    <div class="sprade" data-aos="zoom-in" data-aos-duration="1000">
+       <img src="{% static 'images/sprade-base.png' %}" alt="Image" class="base-img">
+    </div>
+    <div class="line">
+       <img src="{% static 'images/line.png' %}" alt="Image">
+    </div>
+  </section>
+  <!-- ==== / banner section end ==== -->
+
+  <!-- ==== contact section start ==== -->
+  <section class="contact contact-main volunteer pt-120 pb-120">
+    <div class="container">
+       <div class="row gutter-40">
+          <div class="col-12 col-lg-10 offset-xl-1 col-xl-10">
+             <div class="contact__form volunteer__form checkout__form" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                <div class="volunteer__form-content">
+                   <h4 class="title-animation pb-4">Fill Up The Form</h4>
+                </div>
+                <form method="post" class="mt-20">
+                  {% csrf_token %}
+                  
+                <!-- Textbook Title Field -->
+                <div class="input-single">
+                    {{ form.title }}
+                    <i class="fa-solid fa-book"></i>
+                    {% if form.title.errors %}
+                    <div class="text-danger">{{ form.title.errors }}</div>
+                    {% endif %}
+                </div>
+                
+                <!-- ISBN Field -->
+                <div class="input-single mt-20">
+                    {{ form.isbn }}
+                    <i class="fa-solid fa-barcode"></i>
+                    {% if form.isbn.errors %}
+                    <div class="text-danger">{{ form.isbn.errors }}</div>
+                    {% endif %}
+                </div>
+                <!-- Drop Location Dropdown Field -->
+                <div class="input-single">
+                  {{ form.location }}
+                  <i class="fa-solid fa-location-dot"></i>
+                  {% if form.location.errors %}
+                    <div class="text-danger">{{ form.location.errors }}</div>
+                  {% endif %}
+                </div>
+                  
+                  <!-- Submit Button -->
+                  <div class="form-cta">
+                    <button type="submit" aria-label="submit textbook request" title="Submit Textbook Request" class="btn--secondary" data-text="Submit Request">
+                      <span>Submit Request</span>
+                    </button>
+                  </div>
+                </form>
+             </div>
+          </div>
+       </div>
+    </div>
+  </section>
+  <!-- ==== / contact section end ==== -->
+
+{% include "footer.html" %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // You can add extra JavaScript here if needed.
+</script>
+{% endblock %}

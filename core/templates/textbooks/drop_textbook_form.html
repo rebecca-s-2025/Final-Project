@@ -1,0 +1,141 @@
+{% extends 'base_general.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+  .errorlist li {
+    color: red !important;
+  }
+  /* Example active class styling for nav if needed */
+  .navbar__item.active a {
+      color: #ffc071;
+      font-weight: bold;
+  }
+  /* Style for the map container */
+  #map {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 20px;
+  }
+  /* Style for drop location cards */
+  .drop-location-card {
+    margin-bottom: 15px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+  {% include "header.html" %}
+
+  <!-- ==== banner section start ==== -->
+  <section class="common-banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="common-banner__content text-center">
+            <h2 class="title-animation">Drop Textbook Form</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'drop_textbook' %}">Choose Location</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          Drop Textbook Form
+        </li>
+      </ol>
+    </nav>
+    <div class="banner-bg">
+      <img src="{% static 'images/banner/drop-book-banner-bg.jpg' %}" alt="Image">
+    </div>
+    <div class="sprade" data-aos="zoom-in" data-aos-duration="1000">
+      <img src="{% static 'images/sprade-base.png' %}" alt="Image" class="base-img">
+    </div>
+    <div class="line">
+      <img src="{% static 'images/line.png' %}" alt="Image">
+    </div>
+  </section>
+  <!-- ==== / banner section end ==== -->
+
+   <!-- ==== contact section start ==== -->
+   <section class="contact contact-main volunteer pt-120 pb-120">
+    <div class="container">
+       <div class="row gutter-40">
+          <div class="col-12 col-lg-12 col-xl-12">
+              <div class="contact__form volunteer__form checkout__form" data-aos="fade-up"
+              data-aos-duration="1000" data-aos-delay="100">
+              <div class="volunteer__form-content">
+                <h4 class="title-animation">Fill Up The Form</h4>
+                <p>Your email address will not be published. Required fields are marked *</p>
+              </div>
+              
+              <form method="post">
+                {% csrf_token %}
+                <!-- Textbook Title Field -->
+                <div class="input-single">
+                  {{ form.textbook_title }}
+                  <i class="fa-solid fa-book"></i>
+                  {% if form.textbook_title.errors %}
+                    <div class="text-danger">{{ form.textbook_title.errors }}</div>
+                  {% endif %}
+                </div>
+                <!-- ISBN Field -->
+                <div class="input-single">
+                  {{ form.textbook_isbn }}
+                  <i class="fa-solid fa-barcode"></i>
+                  {% if form.textbook_isbn.errors %}
+                    <div class="text-danger">{{ form.textbook_isbn.errors }}</div>
+                  {% endif %}
+                </div>
+                <!-- Drop Date Field -->
+                <div class="input-single">
+                  {{ form.drop_date }}
+                  <i class="fa-solid fa-calendar-days"></i>
+                  {% if form.drop_date.errors %}
+                    <div class="text-danger">{{ form.drop_date.errors }}</div>
+                  {% endif %}
+                </div>
+                <!-- Remarks Field -->
+                <div class="input-single">
+                  {{ form.remarks }}
+                  <i class="fa-solid fa-comment"></i>
+                  {% if form.remarks.errors %}
+                    <div class="text-danger">{{ form.remarks.errors }}</div>
+                  {% endif %}
+                </div>
+                <!-- Drop Location Dropdown Field -->
+                <div class="input-single">
+                  {{ form.drop_location }}
+                  <i class="fa-solid fa-location-dot"></i>
+                  {% if form.drop_location.errors %}
+                    <div class="text-danger">{{ form.drop_location.errors }}</div>
+                  {% endif %}
+                </div>
+                <!-- Submit Button -->
+                <div class="form-cta">
+                  <button type="submit" aria-label="submit" title="submit post" class="btn--secondary" data-text="Submit">
+                    <span>Submit </span>
+                  </button>
+                </div>
+                
+              </form>
+
+          </div>
+          </div>
+       </div>
+    </div>
+ </section>
+ <!-- ==== / contact section end ==== -->
+
+{% include "footer.html" %}
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}

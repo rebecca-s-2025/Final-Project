@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+   
+<head>
+      <!-- #required meta -->
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- #favicon -->
+      <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+      <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+      <!-- #title -->
+      <title>EducAid</title>
+      <!-- #keywords -->
+      <meta name="keywords" content="charity, nonprofit, fundraising, donation, html, bootstrap, scss">
+      <!-- #description -->
+      <meta name="description" content="Nonprofit NGO Fundraising HTML5 Template">
+      <!-- google fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com/">
+      <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+      <link
+         href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&amp;family=Nunito:ital,wght@0,200..1000;1,200..1000&amp;display=swap"
+         rel="stylesheet">
+      <!-- color themes -->
+      <link rel="stylesheet" href="{% static 'css/default-theme.css' %}" id="switch-color">
+      <!-- template settings css -->
+      <link rel="stylesheet" href="{% static 'css/template-settings.css' %}">
+      <!-- main css -->
+      <link rel="stylesheet" href="{% static 'css/main.css' %}">
+      <!-- responsive css -->
+      <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+      <!-- sticky header css -->
+      <link rel="stylesheet" href="{% static 'css/sticky-header.css' %}">
+      <!-- box layout css -->
+      <link rel="stylesheet" href="{% static 'css/box-layout.css' %}">
+      <!-- dark mode css -->
+      <link rel="stylesheet" href="{% static 'css/dark-mode.css' %}">
+      <!-- rtl version css -->
+      <link rel="stylesheet" href="{% static 'css/rtl-version.css' %}">
+      {% block extra_css %}
+      {% endblock %}
+   </head>
+   <body>
+      <!--[if lte IE 9]>
+      <p class="browserupgrade">
+         You are using an <strong>outdated</strong> browser. Please
+         <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+         your experience and security.
+      </p>
+      <![endif]-->
+      {% block content %}{% endblock %}
+      <!-- ==== js dependencies start ==== -->
+      <!-- jquery -->
+      <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+      <!-- bootstrap five js -->
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+      <!-- nice select js -->
+      <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+      <!-- magnific popup js -->
+      <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+      <!-- swiper slider js -->
+      <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+      <!-- viewport js -->
+      <script src="{% static 'js/viewport.jquery.js' %}"></script>
+      <!-- odometer js -->
+      <script src="{% static 'js/odometer.min.js' %}"></script>
+      <!-- vanilla tilt js -->
+      <script src="{% static 'js/vanilla-tilt.min.js' %}"></script>
+      <!-- aos js -->
+      <script src="{% static 'js/aos.js' %}"></script>
+      <!-- phospor icons js -->
+      <script src="{% static 'js/phosphor-icon.js' %}"></script>
+      <!-- splittext js -->
+      <script src="{% static 'js/SplitText.min.js' %}"></script>
+      <!-- scrollto js -->
+      <script src="{% static 'js/ScrollToPlugin.min.js' %}"></script>
+      <!-- scrolltrigger js -->
+      <script src="{% static 'js/ScrollTrigger.min.js' %}"></script>
+      <!-- gsap js -->
+      <script src="{% static 'js/gsap.min.js' %}"></script>
+      <!-- ==== / js dependencies end ==== -->
+      <!-- template settings js -->
+      <script src="{% static 'js/template-settings.js' %}"></script>
+      <!-- main js -->
+      <script src="{% static 'js/custom.js' %}"></script>
+      <script>
+         // CSRF helper functions
+         function getCookie(name) {
+             var cookieValue = null;
+             if (document.cookie && document.cookie !== '') {
+             var cookies = document.cookie.split(';');
+             for (var i = 0; i < cookies.length; i++) {
+                 var cookie = cookies[i].trim();
+                 if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                 break;
+                 }
+             }
+             }
+             return cookieValue;
+         }
+         var csrftoken = getCookie('csrftoken');
+         
+         $.ajaxSetup({
+             beforeSend: function(xhr, settings) {
+             if (!/^http:.*/.test(settings.url) && !/^https:.*/.test(settings.url)) {
+                 xhr.setRequestHeader("X-CSRFToken", csrftoken);
+             }
+             }
+         });
+     </script>
+      {% block extra_js %} {% endblock %}
+      <script>
+        {% comment %} if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function() {
+            navigator.serviceWorker.register("{% static 'sw.js' %}").then(function(registration) {
+              console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }, function(err) {
+              console.log('ServiceWorker registration failed: ', err);
+            });
+          });
+        } {% endcomment %}
+      </script>
+   </body>
+
+</html>

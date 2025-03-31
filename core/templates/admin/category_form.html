@@ -1,0 +1,29 @@
+<!-- templates/admin/category_form.html -->
+{% extends 'base_general.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>{% if form.instance.id %}Edit{% else %}Create{% endif %} Category</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{% url 'admin_category_manage' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}
+
+<!-- templates/admin/category_confirm_delete.html -->
+{% extends 'base_general.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Delete Category</h2>
+    <p>Are you sure you want to delete "{{ category.name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Confirm Delete</button>
+        <a href="{% url 'admin_category_manage' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,468 @@
+{% extends 'base_general.html' %}
+{% load static %}
+{% load humanize %}
+{% block extra_css %}
+<style>
+   .success-modal {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      visibility: hidden;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    
+    .success-modal.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    
+    .success-modal-content {
+      background: #fff;
+      border-radius: 10px;
+      padding: 40px;
+      max-width: 600px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.25);
+      position: relative;
+    }
+    
+    .success-modal-content h2 {
+      color: #28a745;
+      margin-bottom: 10px;
+    }
+    
+    .success-modal-content p {
+      color: #444;
+      font-size: 15px;
+    }
+    
+    .close-success {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      border: none;
+      background: none;
+      font-size: 20px;
+      color: #888;
+      cursor: pointer;
+    }
+    
+    .popup-backdrop {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0,0,0,0.4);
+      z-index: 9998;
+      display: none;
+    }
+    
+    .popup-backdrop.active {
+      display: block;
+    }
+</style>
+{% endblock %}
+
+<!-- templates/core/home.html -->
+{% block content %}
+<div class="page-wrapper">
+    
+    {% include "header.html" %}
+     <!-- ==== banner section start ==== -->
+    <section class="banner-two">
+        <div class="banner-two__slider swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="banner-two__slider-single">
+                    <div class="banner-two__slider-bg" data-background="{% static 'images/banner/banner-one-bg.jpg' %}">
+                    </div>
+                    <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-9 col-lg-7 col-xxl-7">
+                            <div class="banner-two__slider-content">
+                                <span class="sub-title">Join Our Cause</span>
+                                <h1>Increasing
+                                 <span class="bottom-line">Knowledge</span> <br> Through 
+                                 <span class="bottom-line">Sharing</span> 
+                                </h1>
+                                <div class="banner__content-cta mt-40">
+                                <a href="{% url 'home' %}#about-us" aria-label="about us" title="about us" class="btn--primary">About Us</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="banner-two__slider-single">
+                    <div class="banner-two__slider-bg" data-background="{% static 'images/banner/banner-two-bg.jpg' %}">
+                    </div>
+                    <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-9 col-lg-7 col-xxl-7">
+                            <div class="banner-two__slider-content">
+                                <span class="sub-title">Join Our Cause
+                                people</span>
+                                <h1>Increasing
+                                 <span class="bottom-line">Knowledge</span> <br> Through 
+                                 <span class="bottom-line">Sharing</span> 
+                                </h1>
+                                <div class="banner__content-cta mt-40">
+                                <a href="{% url 'home' %}#about-us" aria-label="about us" title="about us" class="btn--primary">About Us</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="slider-navigation d-none d-md-flex">
+        <button type="button" aria-label="prev slide" title="prev slide" class="prev-banner slider-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <button type="button" aria-label="next slide" title="next slide" class="next-banner slider-btn slider-btn-next">
+        <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        </div>
+        <div class="shape-left" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="300">
+        <img src="{% static 'images/banner/banner-two-shape.png' %}" alt="Image" class="base-img">
+        </div>
+        <div class="sprade-shape">
+        <img src="{% static 'images/sprade-base.png' %}" alt="Image" class="base-img" data-aos="zoom-in"
+            data-aos-duration="1000">
+        </div>
+        <div class="unity">
+        <img src="{% static 'images/unity.png' %}" alt="Image">
+        </div>
+    </section>
+    <!-- ==== / banner section end ==== -->
+   
+    <!-- ==== difference two section start  About us Section==== -->
+    <section id="about-us" class="difference-two pt-100">
+       <div class="container">
+          <div class="row gutter-40 align-items-center">
+             <div class="col-12 col-lg-4 col-xxl-5 d-none d-lg-block">
+                <div class="difference-two__thumb-wrapper">
+                   <div class="difference-two__thumb">
+                      <div class="thumb-lg" data-aos="fade-right" data-aos-duration="1000">
+                         <img src="{% static 'images/difference/thumb-sm.png' %}" alt="Image">
+                         <div class="grid-line">
+                            <img src="{% static 'images/help/grid.png' %}" alt="Image" class="base-img">
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="col-12 col-lg-8 col-xxl-7">
+                <div class="difference-two__content">
+                   <div class="section__header mb-20" data-aos="fade-up" data-aos-duration="1000">
+                      <h2 class="title-animation">About Us
+                      </h2>
+                   </div>
+                   <p>We strongly advocate for greater education accessibility, especially for vulnerable communities. Through our cause, we hope to be a voice for educational equality.
+                   </p>
+                   <div class="difference-two__inner cta mt-40">
+                      <div class="difference-two__inner-content">
+                         <div class="difference-two__tab">
+                            <div class="difference-two__tab-btns">
+                               <button class="difference-two__tab-btn active" data-target="#mission" aria-label="mission"
+                                  title="mission">Our Mission</button>
+                               <button class="difference-two__tab-btn" data-target="#vision" aria-label="vision"
+                                  title="vision">Our Vision</button>
+                            </div>
+                            <div class="difference-two__tab-content">
+                               <div class="difference-two__content-single" id="mission">
+                                  <ul>
+                                     <li><i class="fa-solid fa-check"></i>Provide a platform in which educational 
+                                       resources and assistance can remain accessible to students
+                                     </li>
+                                     <li><i class="fa-solid fa-check"></i>Encourage collaboration between students
+                                     </li>
+                                  </ul>
+                               </div>
+                               <div class="difference-two__content-single" id="vision">
+                                  <ul>
+                                     <li><i class="fa-solid fa-check"></i>Lessen education inequality
+                                     </li>
+                                  </ul>
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="difference-two__card">
+                         <div class="card-group card-group-alt">
+                            <div class="thumb">
+                               <i class="icon-fund"></i>
+                            </div>
+                            <div class="content">
+                               <h6>Total Fundraised</h6>
+                               <p>S${{ total_donations|floatformat:2|intcomma }}</p>
+                            </div>
+                         </div>
+                      </div>
+                     
+                   </div>
+                   <a href="{% url 'donate' %}" class="btn--secondary d-none d-md-flex mt-30" data-text="Donate Now"><span>Donate
+                     Now</span></a>
+                </div>
+             </div>
+          </div>
+       </div>
+       <div class="spade">
+          <img src="{% static 'images/spade-green-two.png' %}" alt="Image">
+       </div>
+    </section>
+    <!-- ==== / difference two section end ==== -->
+
+    <!-- ==== event section start ==== -->
+    <section class="explore-area explore-alt pt-100">
+       <div class="container">
+          <div class="row justify-content-center">
+             <div class="col-12 col-lg-10 col-xl-5">
+                <div class="section__header text-center mb-55" data-aos="fade-up" data-aos-duration="1000">
+                   <span>Start Exploring</span>
+                   <h2 class="title-animation">View What We Offer</h2>
+                   <div class="icon-thumb justify-content-center">
+                      <div class="icon-thumb-single">
+                         <span></span>
+                         <span></span>
+                      </div>
+                      <i class="icon-donation"></i>
+                      <div class="icon-thumb-single">
+                         <span></span>
+                         <span></span>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div class="row">
+             <div class="col-12">
+                <div class="explore__wrapper">
+                   <div class="explore__single" data-aos="fade-up" data-aos-duration="1000">
+                      <div class="thumb">
+                         <a href="{% url 'forum_category_list' %}">
+                         <img src="{% static 'images/award/forum.jpg' %}" alt="Image">
+                         </a>
+                      </div>
+                      <a href="{% url 'forum_category_list' %}" class="arr">
+                      <i class="fa-solid fa-arrow-up"></i>
+                      </a>
+                      <div class="content">
+                         <p>Start Discussing</p>
+                         <h5><a href="{% url 'forum_category_list' %}">Forums</a></h5>
+                      </div>
+                   </div>
+                   <div class="explore__single" data-aos="fade-up" data-aos-duration="1000">
+                      <div class="thumb">
+                         <a href="{% url 'notes_category_list' %}">
+                         <img src="{% static 'images/award/notes.jpg' %}" alt="Image">
+                         </a>
+                      </div>
+                      <a href="{% url 'notes_category_list' %}" class="arr">
+                      <i class="fa-solid fa-arrow-up"></i>
+                      </a>
+                      <div class="content">
+                         <p>Share Knowledge</p>
+                         <h5><a href="{% url 'notes_category_list' %}">Student Notes</a></h5>
+                      </div>
+                   </div>
+                   <div class="explore__single explore__single-tall" data-aos="fade-up" data-aos-duration="1000">
+                      <div class="thumb">
+                         <a href="{% url 'list_dropped_textbooks' %}">
+                         <img src="{% static 'images/award/drop-book.jpg' %}" alt="Image">
+                         </a>
+                      </div>
+                      <a href="{% url 'list_dropped_textbooks' %}" class="arr">
+                      <i class="fa-solid fa-arrow-up"></i>
+                      </a>
+                      <div class="content">
+                         <p>Share Textbooks</p>
+                         <h5><a href="{% url 'list_dropped_textbooks' %}">Drop Textbook</a></h5>
+                      </div>
+                   </div>
+                   <div class="explore__single explore__single-wide" data-aos="fade-up" data-aos-duration="1000">
+                      <div class="thumb">
+                         <a href="{% url 'list_textbooks_requests' %}">
+                         <img src="{% static 'images/award/textbook-request.jpg' %}" alt="Image">
+                         </a>
+                      </div>
+                      <a href="{% url 'list_textbooks_requests' %}" class="arr">
+                      <i class="fa-solid fa-arrow-up"></i>
+                      </a>
+                      <div class="content">
+                         <p>Can’t Find a Textbook or Looking to Help Others Find a Textbook?</p>
+                         <h5><a href="{% url 'list_textbooks_requests' %}">Textbook Requests </a></h5>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+       <div class="spade">
+          <img src="{% static 'images/sprade-base.png' %}" alt="Image" class="base-img">
+       </div>
+    </section>
+    <!-- ==== / event section end ==== -->
+    <!-- ==== faq section start ==== -->
+    <section class="faq pt-120 pb-120 primary-bg">
+       <div class="container">
+          <div class="row align-items-center">
+             <div class="col-12 col-lg-10 col-xl-12">
+                <div class="faq__content">
+                   <div class="section__header mb-55" data-aos="fade-up" data-aos-duration="1000">
+                      <h2 class="title-animation">Frequently Asked Questions</h2>
+                   </div>
+                   <div class="faq__content-inner cta" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                      <div class="accordion" id="accordion">
+                         <div class="accordion-item">
+                            <h6 class="accordion-header" id="headingOne">
+                               <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                  data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                 How can I donate my textbooks?
+                               </button>
+                            </h6>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                               data-bs-parent="#accordion">
+                               <div class="accordion-body">
+                                  <p>
+                                    Please visit our Drop Textbooks page to view the list of available locations for you to drop your textbooks!
+                                  </p>
+                               </div>
+                            </div>
+                         </div>
+                         <div class="accordion-item">
+                            <h6 class="accordion-header" id="headingTwo">
+                               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                  data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                  I can’t find a specific textbook, where can I look for it?
+                               </button>
+                            </h6>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                               data-bs-parent="#accordion">
+                               <div class="accordion-body">
+                                  <p>
+                                    You are able to request for specific textbooks on the Textbook Requests page.
+                                     This submits a request that can be viewed publicly, allowing for others to fulfill that request.
+                                  </p>
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </section>
+    <!-- ==== / faq section end ==== -->
+    <!-- ==== contact section start ==== -->
+    <section class="contact-mc">
+       <div class="container">
+          <div class="row justify-content-end">
+             <div class="col-12 col-md-10 col-xl-7">
+                <div class="contact__content pt-120 pb-120">
+                   <div class="section__header mb-55" data-aos="fade-up" data-aos-duration="1000">
+                      <span class="sub-title">Get In Touch</span>
+                      <h2 class="title-animation">Contact Us
+                      </h2>
+                   </div>
+                   <div class="contact__form" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                     <form action="{% url 'contact_submit' %}" method="post">
+                        {% csrf_token %}
+                        <div class="input-group">
+                          <div class="input-single">
+                            <input type="email" name="email" id="contactEmail" required placeholder="your email...">
+                            <i class="fa-solid fa-paper-plane"></i>
+                          </div>
+                          <div class="input-single">
+                            <input type="text" name="phone" id="contactNumber" required placeholder="your phone...">
+                            <i class="fa-solid fa-phone"></i>
+                          </div>
+                        </div>
+                        <div class="input-single">
+                          <input type="text" name="address" id="contactAddress" placeholder="your address...">
+                          <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div class="input-single alter-input">
+                          <textarea name="message" id="contactMessage" placeholder="your message..."></textarea>
+                          <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div class="form-cta">
+                          <button type="submit" class="btn--secondary" data-text="Submit"><span>Submit</span></button>
+                        </div>
+                      </form>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+       <div class="contact-bg">
+          {% comment %} <img src="{% static 'images/contact-bg.jpg' %}" alt="Image" class="parallax-image"> {% endcomment %}
+       </div>
+       <div class="shape-left" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="300">
+          <img src="{% static 'images/shape-left.png' %}" alt="Image" class="base-img">
+       </div>
+    </section>
+    <!-- ==== / contact section end ==== -->
+    
+    <!-- ==== Centered Success Popup Modal ==== -->
+<div class="success-modal" id="successPopup">
+   <div class="success-modal-content">
+     <button class="close-success" aria-label="Close">
+       &times;
+     </button>
+     <h2>✅ Thank you!</h2>
+     <p>Your message has been received successfully. We'll get back to you soon.</p>
+   </div>
+ </div>
+ <div class="popup-backdrop" id="popupBackdrop"></div>
+    
+    {% include "footer.html" %}
+ </div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+<script>
+   function showSuccessPopup() {
+     document.getElementById("successPopup").classList.add("active");
+     document.getElementById("popupBackdrop").classList.add("active");
+   }
+ 
+   document.addEventListener("DOMContentLoaded", function () {
+     const closeBtn = document.querySelector(".close-success");
+     const backdrop = document.getElementById("popupBackdrop");
+ 
+     if (closeBtn) {
+       closeBtn.addEventListener("click", () => {
+         document.getElementById("successPopup").classList.remove("active");
+         backdrop.classList.remove("active");
+       });
+     }
+ 
+     if (backdrop) {
+       backdrop.addEventListener("click", () => {
+         document.getElementById("successPopup").classList.remove("active");
+         backdrop.classList.remove("active");
+       });
+     }
+ 
+     // Automatically show if there's a Django success message
+     {% if messages %}
+       {% for message in messages %}
+
+         {% if message.tags == "success" and message.message == "Thanks for contacting us" %}
+           showSuccessPopup();
+         {% endif %}
+       {% endfor %}
+     {% endif %}
+   });
+ </script>
+{% endblock %}

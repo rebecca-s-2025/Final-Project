@@ -1,0 +1,121 @@
+{% extends 'base_general.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+  .errorlist li {
+    color: red !important;
+  }
+  /* Example active class styling for nav if needed */
+  .navbar__item.active a {
+      color: #ffc071;
+      font-weight: bold;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+  {% include "header.html" %}
+
+  <!-- ==== banner section start ==== -->
+  <section class="common-banner">
+    <div class="container">
+       <div class="row">
+          <div class="col-12">
+             <div class="common-banner__content text-center">
+                <h2 class="title-animation">Dropped Textbook</h2>
+             </div>
+          </div>
+       </div>
+    </div>
+    <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+             <a href="{% url 'home' %}">Home</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Dropped Textbook
+          </li>
+       </ol>
+    </nav>
+    <div class="banner-bg">
+      <img src="{% static 'images/banner/drop-book-banner-bg.jpg' %}" alt="Image">
+    </div>
+    <div class="sprade" data-aos="zoom-in" data-aos-duration="1000">
+       <img src="{% static 'images/sprade-base.png' %}" alt="Image" class="base-img">
+    </div>
+    <div class="line">
+       <img src="{% static 'images/line.png' %}" alt="Image">
+    </div>
+  </section>
+  <!-- ==== / banner section end ==== -->
+
+  <!-- ==== cart section start ==== -->
+  <section class="cart-main pt-100 pb-120">
+    <div class="container">
+      <div class="row gutter-60">
+        <div class="col-12">
+          <!-- Use an anchor styled as a button instead of nesting a button within an anchor -->
+          <div class="text-end mb-4">
+            <a class="offset-md-9" href="{% url 'drop_textbook' %}">
+                <button type="submit" aria-label="Drop a new Textbook"
+                     class="btn--primary">Drop a new Textbook
+                </button>
+            </a>
+          </div>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <form method="get" class="d-flex w-100" role="search">
+              <input type="text" name="q" value="{{ request.GET.q }}" class="form-control me-2"
+                     placeholder="Search by title, ISBN, or location">
+              <button type="submit" class="btn btn--primary">Search</button>
+            </form>
+          </div>
+          <div class="cart__inner" data-aos="fade-up" data-aos-duration="1000">
+            <div class="cart-table">
+                <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                          <th>Textbook Title</th>
+                          <th>ISBN</th>
+                          <th>Drop Location</th>
+                          <th>Drop Date</th>
+                          <th>Status</th>
+                          <th>Remarks</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% if drops%}
+                            {% for drop in drops %}
+                                <tr>
+                                    <td>{{ drop.textbook_title }}</td>
+                                    <td>{{ drop.textbook_isbn }}</td>
+                                    <td>{{ drop.drop_location.name }}</td>
+                                    <td>{{ drop.drop_date|date:"d M Y h:i A" }}</td>
+                                    <td>{{ drop.get_status_display }}</td>
+                                    <td>{{ drop.remarks|default:"-" }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="6">
+                                    <p class="text-center">No Data Found</p>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                 </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ==== / cart section end ==== -->
+
+  {% include "footer.html" %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Add any extra JavaScript here if needed.
+</script>
+{% endblock %}

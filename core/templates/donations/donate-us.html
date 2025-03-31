@@ -1,0 +1,244 @@
+{% extends 'base_general.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+  .errorlist li {
+    color: red !important;
+  }
+  /* Additional custom styling for donation form */
+  .donation-form__single {
+    margin-bottom: 20px;
+  }
+  .input-group-icon {
+    position: relative;
+  }
+  .input-group-icon .thumb {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+  }
+  .input-group-icon input {
+    padding-left: 40px;
+  }
+  .made-amount {
+    margin-top: 10px;
+  }
+  .made-amount .donation-amount {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px 10px;
+    background: #f1f1f1;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .made-amount .donation-amount.active {
+    background: #ffc071;
+    color: #fff;
+  }
+  .alert {
+   padding: 15px;
+   background-color: #d4edda;
+   color: #155724;
+   border-radius: 5px;
+   margin-bottom: 20px;
+   border: 1px solid #c3e6cb;
+ }
+</style>
+{% endblock %}
+
+<!-- templates/core/home.html -->
+{% block content %}
+<div class="page-wrapper">
+    
+    {% include "header.html" %}
+         
+         <!-- ==== banner section start ==== -->
+         <section class="common-banner">
+            <div class="container">
+               <div class="row">
+                  <div class="col-12">
+                     <div class="common-banner__content text-center">
+                        <h2 class="title-animation">Donate</h2>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <nav aria-label="breadcrumb">
+               <ol class="breadcrumb">
+                  <li class="breadcrumb-item">
+                     <a href="index-2.html">Home</a>
+                  </li>
+                  <li class="breadcrumb-item active" aria-current="page">
+                     Donate
+                  </li>
+               </ol>
+            </nav>
+            <div class="banner-bg">
+               <img src="{% static 'images/banner/donate-banner-bg.jpg' %}" alt="Image">
+            </div>
+            <div class="sprade" data-aos="zoom-in" data-aos-duration="1000">
+               <img src="{% static 'images/sprade-base.png' %}" alt="Image" class="base-img">
+            </div>
+            <div class="line">
+               <img src="{% static 'images/line.png' %}" alt="Image">
+            </div>
+         </section>
+         <!-- ==== / banner section end ==== -->
+         <!-- ==== donate us section start ==== -->
+         <div class="cm-details donate-us community checkout faq pt-120 pb-120">
+            <div class="container">
+               <div class="row gutter-60">
+                  <div class="col-12 col-xl-12">
+                     <div class="cm-details__content">
+                           <div class="donate-inner" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                           <div class="cm-group">
+                              {% comment %} <h3 class="title-animation">Help Children Rise out of Poverty</h3>
+                              <p>Lorem Ipsum is simply dummy a of the printing and type setting industry Loreaim
+                                 Ipsum has been the industry's standard dummy
+                              </p> {% endcomment %}
+                              {% if messages %}
+                                    <div class="container mt-4">
+                                       {% for message in messages %}
+                                          <div class="alert alert-success" role="alert">
+                                          {{ message }}
+                                          </div>
+                                       {% endfor %}
+                                    </div>
+                              {% endif %}
+                           </div>
+                           <div class="cta">
+                              <div class="community-donation">
+                                 <div class="community-donation__inner mt-60">
+                                    <h5>Support Our Cause.</h5>
+                                    <div class="warning">
+                                       <div class="line"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                                       <p><strong>Notice:</strong> Test mode is enabled. While in test mode no
+                                          live
+                                          donations are processed.
+                                       </p>
+                                    </div>
+                                    <div class="donation-form" style="margin-left:20px;" data-aos-delay="300">
+                                       <form method="post">
+                                          {% csrf_token %}
+                                          
+                                          <!-- Donation Amount Field -->
+                                          <div class="donation-form__single">
+                                            <h5>Your Donation:</h5>
+                                            <div class="input-group-icon">
+                                              <div class="thumb" style="margin-left:-20px;">
+                                                <i class="fa-solid fa-dollar-sign"></i>
+                                              </div>
+                                              {{ form.amount }}
+                                              {% if form.amount.errors %}
+                                                <div class="text-danger">{{ form.amount.errors }}</div>
+                                              {% endif %}
+                                            </div>
+                                            <div class="made-amount">
+                                              <span class="donation-amount" data-amount="20">$20</span>
+                                              <span class="donation-amount" data-amount="50">$50</span>
+                                              <span class="donation-amount" data-amount="100">$100</span>
+                                              <span class="donation-amount" data-amount="200">$200</span>
+                                              <span class="donation-amount custom-amount active" data-amount="custom">Custom</span>
+                                            </div>
+                                          </div>
+                                          
+                                          <div class="input-single">
+                                             <label>First Name :</label>
+                                             {{ form.first_name }}
+                                             {% if form.first_name.errors %}
+                                                <div class="text-danger">{{ form.first_name.errors }}</div>
+                                             {% endif %}
+                                          </div>
+                                          <div class="input-single py-4">
+                                             
+                                             <label>Last Name :</label>
+                                             {{ form.last_name }}
+                                             {% if form.last_name.errors %}
+                                                <div class="text-danger">{{ form.last_name.errors }}</div>
+                                             {% endif %}
+                                          </div>
+                                          
+                                          <div class="input-single pb-4">
+                                             
+                                             <label>Email :</label>
+                                             {{ form.receipt_email}}
+                                             {% if form.receipt_email.errors %}
+                                                <div class="text-danger">{{ form.receipt_email.errors }}</div>
+                                             {% endif %}
+                                          </div>
+                                          
+                                          <!-- Submit Button -->
+                                          <div class="cta">
+                                            <button type="submit" class="btn--secondary" data-text="Donate Now"><span>Donate Now</span></button>
+                                          </div>
+                                        </form>
+                                       {% comment %} <form method="post">
+                                          {% csrf_token %}
+                                          <div class="donation-form__single">
+                                             <h5>Your Donation:</h5>
+                                             <div class="input-group-icon">
+                                                <div class="thumb">
+                                                   <i class="fa-solid fa-dollar-sign"></i>
+                                                </div>
+                                                <input type="text" name="donation-amount" id="donationAmount">
+                                             </div>
+                                             <div class="made-amount">
+                                                <span class="donation-amount">20</span>
+                                                <span class="donation-amount">50</span>
+                                                <span class="donation-amount active">100</span>
+                                                <span class="donation-amount">200</span>
+                                                <span class="donation-amount custom-amount">Custom</span>
+                                             </div>
+                                          </div>
+                                          <div class="cta">
+                                             <a type="submit" aria-label="donate us" title="donate us"
+                                                class="btn--secondary" data-text="Donate Now"><span>Donate
+                                             Now</span></a>
+                                          </div>
+                                       </form> {% endcomment %}
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- ==== / donate us section end ==== -->
+        
+    {% include "footer.html" %}
+   </div>
+  {% endblock %}
+
+  {% block extra_js %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Get the donation amount input field rendered by DonationForm
+  const donationAmountInput = document.querySelector('input[name="amount"]');
+  // Get all preset donation amount spans
+  const presetAmounts = document.querySelectorAll('.made-amount .donation-amount');
+
+  // When a preset amount is clicked, update the donation amount input.
+  presetAmounts.forEach(function(span) {
+    span.addEventListener('click', function() {
+      // Remove 'active' class from all preset spans
+      presetAmounts.forEach(s => s.classList.remove('active'));
+      // Add active class to the clicked span
+      this.classList.add('active');
+      // If 'Custom' is selected, clear the input and focus on it.
+      if (this.dataset.amount === "custom") {
+        donationAmountInput.value = "";
+        donationAmountInput.focus();
+      } else {
+        donationAmountInput.value = this.dataset.amount;
+      }
+    });
+  });
+});
+</script>
+{% endblock %}

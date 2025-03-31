@@ -1,0 +1,87 @@
+{% extends 'base_general.html' %}
+{% load static %}
+
+{% block  extra_css%}
+<style>
+  .errorlist li {
+    color: red !important;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+  {% include "header.html" %}
+
+ <!-- ==== contact section start ==== -->
+ <section class="contact contact-main volunteer pt-120 pb-120">
+    <div class="container">
+       <div class="row gutter-40">
+          <div class="col-12 col-lg-10 offset-xl-1 col-xl-10">
+             <div class="contact__form volunteer__form checkout__form" data-aos="fade-up"
+                data-aos-duration="1000" data-aos-delay="100">
+                <div class="row">
+                    <div class="col-7">
+                        <h3>Your Profile</h2>
+                    </div>
+                    <div class="col-2">
+                    <a href="{% url 'password_change' %}" class="btn--secondary d-none d-md-flex" data-text="Change Password"><span>Change Password</span></a>
+                    
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-2">
+                    <a href="{% url 'update_profile' %}" class="btn--secondary d-none d-md-flex" data-text="Edit Profile"><span>Edit Profile</span></a>
+                    </div>
+                </div>
+                <p class="py-3"><strong>Level:</strong> Level {{ user.level }} Contributor</p>
+                <p class="py-3"><strong>Profile Pic:</strong> {% if user.photo %}<img style="height:100px; width:auto" src="{{ user.photo.url }}" alt="Image">{% else %}No Photo{% endif %}</p>
+                <p class="public_profile-3 pb-3"><strong>Username:</strong> {{ user.username }}</p>
+                <p class="pb-3"><strong>Bio:</strong> {{ user.bio }}</p>
+                <p class="pb-3"><strong>Total Points:</strong> {{ likes }}</p>
+                
+                <p class="pb-3"><strong>Recent Posts:</strong>
+                {% if recent_posts%}
+                <ul style="margin-left:30px; list-style: none; padding-left: 0;">
+                    {% for post in recent_posts %}
+                      <li style="margin-bottom: 10px; padding: 10px 15px; background: #f9f9f9; border-radius: 6px; transition: background 0.3s;">
+                        <a href="{% url 'forum_post_detail' post.id %}" 
+                           style="text-decoration: none; color: #333; font-weight: 500; display: block;">
+                          {{ post.title }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% else%}
+                -
+                {% endif %}
+                </p>
+                <p class="pb-3"><strong>Recent Notes:</strong>
+                    {% if recent_notes%}
+                    <ul style="margin-left:30px; list-style: none; padding-left: 0;">
+                        {% for post in recent_notes %}
+                          <li style="margin-bottom: 10px; padding: 10px 15px; background: #f9f9f9; border-radius: 6px; transition: background 0.3s;">
+                            <a href="{% url 'forum_post_detail' post.id %}" 
+                               style="text-decoration: none; color: #333; font-weight: 500; display: block;">
+                              {{ post.title }}
+                            </a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                {% else %}
+                -
+                {% endif %}
+                </p>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+ <!-- ==== / contact section end ==== -->
+
+{% include "footer.html" %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Add any extra JavaScript here if needed
+</script>
+{% endblock %}

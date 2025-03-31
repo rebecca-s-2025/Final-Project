@@ -1,0 +1,308 @@
+{% load static %}
+
+{% block extra_css %}
+<style>
+   .btn-link {
+      background: none;
+      border: 0;
+      color: #ffc071;
+      text-decoration: none;
+      padding: 0;
+      cursor: pointer;
+    }
+    .btn-link:hover {
+      color: #ffc071;
+      text-decoration: none !important;
+    }
+    .sign_out_btn {
+      border: 0px !important;
+    }
+    .sign_out_btn_text {
+      font-weight:800;
+      color: var(--quaternary-color);
+      text-decoration: none !important;
+    }
+    .notification-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .notification-list {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #fff;
+      min-width: 280px;
+      max-height: 300px;
+      overflow-y: auto;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      z-index: 999;
+      padding: 10px;
+      border-radius: 6px;
+    }
+    .notification-dropdown:hover .notification-list {
+      display: block;
+    }
+    .notification-item {
+      padding: 8px 12px;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+    .notification-item:last-child {
+      border-bottom: none;
+    }
+    .notification-icon {
+      font-size: 18px;
+      color: #ffc107;
+      margin-right: 6px;
+    }
+    .notification-count {
+      background-color: red;
+      color: white;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 50%;
+      vertical-align: super;
+      margin-left: 4px;
+    }
+    .notification-header {
+      padding: 4px 10px;
+      text-align: right;
+    }
+    .btn-mark-all {
+      font-size: 12px;
+      background: none;
+      border: none;
+      color: #007bff;
+      cursor: pointer;
+    }
+</style>
+{% endblock %}
+
+ <!-- ==== topbar start ==== -->
+ <div class="topbar topbar__secondary d-none d-lg-block">
+    <div class="container">
+       <div class="row">
+          <div class="col-12">
+             <div class="topbar__inner">
+                <div class="row align-items-center">
+                   <div class="col-12 col-lg-6">
+                      <div class="topbar__list-wrapper">
+                         <ul class="topbar__list">
+                            <li><a href="tel:+65-12345678"><i class="ph ph-phone-call"></i>+65-12345678</a>
+                            </li>
+                            <li><a href="mailto:contact.educaid@gmail.com"><i
+                               class="ph ph-envelope-simple"></i>contact.educaid@gmail.com</a>
+                            </li>
+                         </ul>
+                      </div>
+                   </div>
+                   <div class="col-12 col-lg-6">
+                      <div class="topbar__items d-flex align-items-center justify-content-end flex-wrap">
+                         <div class="topbar__items-menu">
+                            <div class="topbar__items-menu__icon">
+                               <i class="ph ph-user"></i>
+                            </div>
+                            <ul class="topbar__items-menu__link">
+                                {% if user.is_authenticated %}
+                                
+                               <li><form method="post" action="{% url 'logout' %}" class="d-inline">
+                                 {% csrf_token %}
+                                 <button type="submit" class="btn btn-link p-0"> User: {{user.username}} / Sign Out</button>
+                               </form></li>
+
+                               {% else %}
+                                <li><a href="{% url 'login' %}">Sign In</a></li>
+                                <li>/</li>
+                                <li><a href="{% url 'register' %}">Register</a></li>
+                                
+                               {% endif %}
+                            </ul>
+                         </div>
+                         <div class="social topbar__social-menu">
+                            <a >
+                              <i class="fa-regular fa-circle"></i>
+                            </a>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ <!-- ==== / topbar end ==== -->
+ <!-- ==== header start ==== -->
+ <header class="header header-secondary">
+    <div class="container">
+       <div class="row">
+          <div class="col-12">
+             <div class="main-header__menu-box">
+                <nav class="navbar p-0">
+                   <div class="navbar-logo">
+                      <a href="{% url 'home' %}">
+                      <img src="{% static 'images/logo.png' %}" style="height: 50px !important;" alt="Image">
+                      </a>
+                   </div>
+                   <div class="navbar__menu d-none d-xl-block">
+                      <ul class="navbar__list">
+                         <li class="navbar__item nav-fade">
+                            <a href="{% url 'home' %}">Home</a>
+                         </li>
+                         <li class="navbar__item nav-fade">
+                            <a href="{% url 'home' %}#about-us">About us</a>
+                         </li>
+                         <li class="navbar__item nav-fade">
+                           <a href="{% url 'forum_category_list' %}">Forums</a>
+                        </li>
+
+                        <li class="navbar__item nav-fade">
+                           <a href="{% url 'notes_category_list' %}">Student Notes</a>
+                        </li>
+
+                        <li class="navbar__item nav-fade">
+                           <a href="{% url 'list_dropped_textbooks' %}">Drop Textbook</a>
+                        </li>
+                        <li class="navbar__item nav-fade">
+                           <a href="{% url 'list_textbooks_requests' %}">Textbook Requests</a>
+                        </li>
+                        {% if user.is_authenticated %}
+
+                        <li class="navbar__item nav-fade">
+                           <a href="{% url 'view_profile' %}">Profile</a>
+                        </li>
+                        <li class="navbar__item navbar__item--has-children nav-fade">
+                           <a href="#" aria-label="notifications dropdown" class="navbar__dropdown-label dropdown-label-alter">
+                             <i class="ph ph-bell"></i>
+                             {% if unread_notifications_count > 0 %}
+                               <span class="notification-count" style="background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px; margin-left: 4px;">
+                                 {{ unread_notifications_count }}
+                               </span>
+                             {% endif %}
+                           </a>
+                           <ul class="navbar__sub-menu" style="max-height: 300px; overflow-y: auto; min-width: 250px; padding-top:10px;">
+                             {% if recent_notifications %}
+                               <li class="notification-header" style="text-align: right; padding: 0px 10px;">
+                                 <button id="mark-all-read" class="btn-mark-all" style="font-size: 12px; background: none; border: none; color: #007bff; cursor: pointer;">Mark all as read</button>
+                               </li>
+                               {% for notification in recent_notifications %}
+                                 <li style="padding: 10px 12px; border-bottom: 1px solid #eee;">
+                                   <p style="font-size: 14px; color: #333; {% if not notification.read %} font-weight: bold; {% endif %}">
+                                     {{ notification.message|truncatechars:50 }}
+                                   </p>
+                                 </li>
+                               {% endfor %}
+                             {% else %}
+                               <li><a>No notifications</a></li>
+                             {% endif %}
+                           </ul>
+                         </li>
+                        
+                        
+                         <li class="navbar__item nav-fade" >
+                           <a href="#"> <form method="post" action="{% url 'logout' %}" class="d-inline">
+                              {% csrf_token %}
+                              <button class="sign_out_btn" type="submit"><span class="sign_out_btn_text">Sign Out</span></button>
+                           </form></a>
+                           
+                        </li>
+                        {% else %}
+                        <li class="navbar__item nav-fade"><a href="{% url 'login' %}">Sign In</a></li>
+                        <li class="navbar__item nav-fade"><a href="{% url 'register' %}">Register</a></li>
+                        {% endif %}
+
+                      </ul>
+                   </div>
+                   <div class="navbar__options">
+                      <div class="navbar__mobile-options ">
+                         {% comment %} <div class="search-box">
+                            <button class="open-search" aria-label="search products" title="open search box">
+                            <i class="ph ph-magnifying-glass"></i>
+                            </button>
+                         </div> {% endcomment %}
+                         {% comment %} <span class="divider"></span>
+                         <div class="cart-box">
+                            <button class="open-cart cart" aria-label="cart" title="open cart">
+                            <i class="ph ph-shopping-cart-simple"></i>
+                            <span>02</span>
+                            </button>
+                         </div> {% endcomment %}
+                         <a href="{% url 'donate' %}" class="btn--secondary d-none d-md-flex" data-text="Donate Now"><span>Donate
+                         Now</span></a>
+                      </div>
+                      <button class="open-offcanvas-nav d-flex d-xl-none" aria-label="toggle mobile menu"
+                         title="open offcanvas menu">
+                      <span class="icon-bar top-bar"></span>
+                      <span class="icon-bar middle-bar"></span>
+                      <span class="icon-bar bottom-bar"></span>
+                      </button>
+                   </div>
+                </nav>
+             </div>
+          </div>
+       </div>
+    </div>
+ </header>
+ <!-- ==== / header end ==== -->
+ <!-- ==== mobile menu start ==== -->
+ <div class="mobile-menu d-block d-xl-none">
+    <nav class="mobile-menu__wrapper">
+       <div class="mobile-menu__header nav-fade">
+          <div class="logo">
+             <a href="{% url 'home' %}" aria-label="home page" title="logo">
+             <img src="{% static 'images/logo.png' %}"  alt="Image">
+             </a>
+          </div>
+          <button aria-label="close mobile menu" class="close-mobile-menu">
+          <i class="fa-solid fa-xmark"></i>
+          </button>
+       </div>
+       <div class="mobile-menu__list"></div>
+       <div class="mobile-menu__cta nav-fade d-block d-md-none">
+          <a href="{% url 'donate' %}" class="btn--secondary" data-text="Donate Now"><span>Donate
+          Now</span></a>
+       </div>
+       <div class="mobile-menu__social social nav-fade">
+          <a href="https://www.facebook.com/" target="_blank" aria-label="share us on facebook" title="facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+          </a>
+          <a href="https://vimeo.com/" target="_blank" aria-label="share us on vimeo" title="vimeo">
+          <i class="fa-brands fa-vimeo-v"></i>
+          </a>
+          <a href="https://x.com/" target="_blank" aria-label="share us on twitter" title="twitter">
+          <i class="fa-brands fa-twitter"></i>
+          </a>
+          <a href="https://www.linkedin.com/" target="_blank" aria-label="share us on linkedin" title="linkedin">
+          <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+       </div>
+    </nav>
+ </div>
+ <div class="mobile-menu__backdrop"></div>
+ <!-- ==== / mobile menu end ==== -->
+ {% block extra_js %}
+ <script>
+   // Notifcation Mark all as read
+   document.addEventListener("DOMContentLoaded", function () {
+      const markAllBtn = document.getElementById("mark-all-read");
+      if (markAllBtn) {
+        markAllBtn.addEventListener("click", function () {
+          fetch("{% url 'mark_all_notifications_read' %}", {
+            method: "POST",
+            headers: {
+              "X-CSRFToken": "{{ csrf_token }}",
+              "X-Requested-With": "XMLHttpRequest",
+            },
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.status === "ok") {
+              // Reload the page to reflect changes
+              location.reload();
+            }
+          });
+        });
+      }
+    });
+</script>
+ {% endblock %}

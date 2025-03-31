@@ -1,0 +1,141 @@
+{% extends 'base_general.html' %}
+{% load static %}
+
+{% block  extra_css%}
+<style>
+  .errorlist li {
+    color: red !important;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+  {% include "header.html" %}
+
+  <!-- ==== banner section start ==== -->
+  <section class="common-banner">
+    <div class="container">
+       <div class="row">
+          <div class="col-12">
+             <div class="common-banner__content text-center">
+                <h2 class="title-animation">Post your thoughts...</h2>
+             </div>
+          </div>
+       </div>
+    </div>
+    <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="{% url 'forum_category_list' %}">Forum Categories</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            Create Post
+        </li>
+       </ol>
+    </nav>
+    <div class="banner-bg">
+      <img src="{% static 'images/banner/forum-banner-bg.jpg' %}" alt="Image">
+    </div>
+    <div class="sprade" data-aos="zoom-in" data-aos-duration="1000">
+       <img src="{% static 'images/sprade-base.png' %}" alt="Image" class="base-img">
+    </div>
+    <div class="line">
+       <img src="{% static 'images/line.png' %}" alt="Image">
+    </div>
+ </section>
+ <!-- ==== / banner section end ==== -->
+
+ <!-- ==== contact section start ==== -->
+ <section class="contact contact-main volunteer pt-120 pb-120">
+    <div class="container">
+       <div class="row gutter-40">
+          <div class="col-12 col-lg-10 offset-xl-1 col-xl-10">
+             <div class="contact__form volunteer__form checkout__form" data-aos="fade-up"
+                data-aos-duration="1000" data-aos-delay="100">
+                <div class="volunteer__form-content">
+                   <h4 class="title-animation pb-4">Fill Up The Form</h4>
+                   <small >Your email address will not be published, and you can also post ananymously. Required fields are marked *</small>
+                </div>
+                <form method="post" enctype="multipart/form-data" class="mt-60">
+                  {% csrf_token %}
+                  
+                  <!-- Title Field -->
+                  <div class="input-single">
+                    {{ form.title }}
+                    <i class="fa-solid fa-heading"></i>
+                    {% if form.title.errors %}
+                      <div class="text-danger">{{ form.title.errors }}</div>
+                    {% endif %}
+                  </div>
+                  
+                  <!-- Category Field -->
+                  <div class="input-single">
+                    {{ form.category }}
+                    <i class="fa-solid fa-list"></i>
+                    {% if form.category.errors %}
+                      <div class="text-danger">{{ form.category.errors }}</div>
+                    {% endif %}
+                  </div>
+                  
+                  <!-- Content Field -->
+                  <div class="input-single alter-input">
+                    {{ form.content }}
+                    <i class="fa-solid fa-align-left"></i>
+                    {% if form.content.errors %}
+                      <div class="text-danger">{{ form.content.errors }}</div>
+                    {% endif %}
+                  </div>
+                  
+                  <!-- Image Field -->
+                  <div class="input-single">
+                    {{ form.image }}
+                    <i class="fa-solid fa-image"></i>
+                    {% if form.image.errors %}
+                      <div class="text-danger">{{ form.image.errors }}</div>
+                    {% endif %}
+                  </div>
+                  
+                  <!-- Tags Field -->
+                  <div class="input-single">
+                    {{ form.tags }}
+                    <i class="fa-solid fa-tags"></i>
+                    {% if form.tags.errors %}
+                      <div class="text-danger">{{ form.tags.errors }}</div>
+                    {% endif %}
+                  </div>
+                  
+                  <!-- Anonymous Field -->
+                  <div class="input-single">
+                    <span>Post anonymously</span>
+                     {{ form.anonymous }}
+                    <i class="fa-solid fa-user-secret"></i>
+                    {% if form.anonymous.errors %}
+                      <div class="text-danger">{{ form.anonymous.errors }}</div>
+                    {% endif %}
+                  </div>
+                  
+                  <!-- Submit Button -->
+                  <div class="form-cta">
+                    <button type="submit" aria-label="submit post" title="submit post" class="btn--secondary" data-text="Submit Post">
+                      <span>Submit Post</span>
+                    </button>
+                  </div>
+                </form>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+ <!-- ==== / contact section end ==== -->
+
+{% include "footer.html" %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Add any extra JavaScript here if needed
+</script>
+{% endblock %}

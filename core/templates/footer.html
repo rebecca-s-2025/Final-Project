@@ -1,0 +1,122 @@
+{% load static %}
+<!-- ==== footer start ==== -->
+<footer class="footer footer-two pt-100">
+    <div class="container">
+       <div class="row gutter-60">
+          <div class="col-12 col-md-6 col-xl-4">
+             <div class="footer__widget" data-aos="fade-up" data-aos-duration="1200">
+                <div class="footer__logo">
+                   <a href="{% url 'home' %}">
+                   <img src="{% static 'images/logo-light.png' %}" style="max-width: 65% !important;" alt="Image">
+                   </a>
+                </div>
+             </div>
+          </div>
+          <div class="col-12 col-md-6 col-xl-4">
+             <div class="footer__widget" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
+                <div class="footer__widget-intro">
+                   <h5>Quick Links</h5>
+                   <div class="line">
+                      <span class="large-line"></span>
+                      <span class="small-line"></span>
+                      <span class="small-line"></span>
+                   </div>
+                </div>
+                <div class="footer__widget-content">
+                   <ul class="footer__widget-list">
+                      <li>
+                        <a href="{% url 'home' %}"><i class="fa-solid fa-angle-right"></i>Home</a>
+                      </li>
+                      <li>
+                        <a href="{% url 'home' %}#about-us"><i class="fa-solid fa-angle-right"></i>About Us</a>
+                      </li>
+                      <li>
+                        <a href="{% url 'forum_category_list' %}"><i class="fa-solid fa-angle-right"></i>Forums</a>
+                      </li>
+                      <li>
+                        <a href="{% url 'notes_category_list' %}"><i class="fa-solid fa-angle-right"></i>Student Notes</a>
+                      </li>
+                      <li>
+                        <a href="{% url 'list_dropped_textbooks' %}"><i class="fa-solid fa-angle-right"></i>Drop Textbook</a>
+                      </li>
+                      <li>
+                        <a href="{% url 'list_textbooks_requests' %}"><i class="fa-solid fa-angle-right"></i>Textbook Requests</a>
+                      </li>
+                      <li>
+                        <a href="{% url 'donate' %}"><i class="fa-solid fa-angle-right"></i>Donate</a>
+                      </li>
+                   </ul>
+                </div>
+             </div>
+          </div>
+          <div class="col-12 col-md-6 col-xl-4">
+             <div class="footer__widget" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="600">
+                <div class="footer__widget-intro">
+                   <h5>Get In Touch</h5>
+                   <div class="line">
+                      <span class="large-line"></span>
+                      <span class="small-line"></span>
+                      <span class="small-line"></span>
+                   </div>
+                </div>
+                <div class="footer__widget-content">
+                   <ul class="footer__contact-list">
+                      <li><a href="tel:+65-12345678"><i class="fa-solid fa-phone-flip"></i>+65-12345678</a>
+                      </li>
+                      <li><a href="mailto:contact.educaid@gmail.com"><i class="fa-regular fa-envelope"></i>contact.educaid@gmail.com</a></li>
+                   </ul>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+    <div class="footer__bottom">
+       <div class="container">
+          <div class="row">
+             <div class="col-12">
+                <div class="footer__bottom-inner">
+                   <div class="row align-items-center gutter-24">
+                      <div class="col-12 col-lg-7">
+                         <div class="footer__bottom-left">
+                            <p class="text-center text-lg-start">Copyright &copy; <span id="copyrightYear"></span> <a
+                               href="{% url 'home' %}">EducAid</a>.
+                               All rights
+                               reserved.
+                            </p>
+                         </div>
+                      </div>
+                      <div class="col-12 col-lg-5">
+                         <div class="footer__bottom-right">
+                            <div class="social justify-content-center justify-content-lg-end">
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+    <div class="sprade" data-aos="zoom-in" data-aos-duration="1000">
+       <img src="{% static 'images/sprade.png' %}" alt="Image" class="base-img">
+    </div>
+    <div class="sprade-light" data-aos="zoom-in" data-aos-duration="1000">
+       <img src="{% static 'images/sprade-light.png' %}" alt="Image">
+    </div>
+    <div class="footer__thumb-right" data-aos="fade-left" data-aos-duration="1000">
+       <img src="{% static 'images/mask/footer-right.png' %}" alt="Image">
+    </div>
+ </footer>
+ <!-- ==== / footer end ==== -->
+ <!-- ==== custom cursor start ==== -->
+ <div class="mouseCursor cursor-outer"></div>
+ <div class="mouseCursor cursor-inner"></div>
+ <!-- ==== / custom cursor end ==== -->
+ <!-- ==== scroll to top start ==== -->
+ <button class="progress-wrap" aria-label="scroll indicator" title="back to top">
+    <span></span>
+    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+       <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+    </svg>
+ </button>
+ <!-- ==== / scroll to top end ==== -->

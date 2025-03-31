@@ -1,0 +1,27 @@
+<div class="cm-sidebar-widget" data-aos="fade-up" data-aos-duration="1000"
+    data-aos-delay="100">
+    <div class="intro">
+    <h5>Recent Notes</h5>
+    </div>
+    <div class="cm-sidebar-post">
+        {% for recent_post in recent_posts %}
+            <div class="single-item">
+                <div class="thumb">
+                    <a href="{% url 'note_detail' recent_post.id  %}">
+                        {% if recent_post.file%}
+                        <img src="{{ recent_post.file.url }}" alt="Image">
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="content">
+                    <p><i class="fa-solid fa-calendar-days"></i> <span>{{recent_post.created_on|date:"d M Y h:m"  }}</span>
+                    </p>
+                    <p><a href="{% url 'note_detail' recent_post.id %}">{{recent_post.title}}</a>
+                    </p>
+                </div>
+            </div>
+        {% empty %}
+        No Notes Yet..
+        {% endfor %}
+    </div>
+</div>

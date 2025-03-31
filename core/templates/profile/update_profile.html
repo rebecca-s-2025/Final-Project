@@ -1,0 +1,119 @@
+{% extends 'base_general.html' %}
+{% load static %}
+
+{% block  extra_css%}
+<style>
+  .errorlist li {
+    color: red !important;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+  {% include "header.html" %}
+
+ <!-- ==== contact section start ==== -->
+
+ <section class="contact contact-main volunteer pt-120 pb-120">
+    <div class="container">
+       <div class="row gutter-40">
+          <div class="col-12 col-lg-10 offset-xl-1 col-xl-10">
+             <div class="contact__form volunteer__form checkout__form" data-aos="fade-up"
+                data-aos-duration="1000" data-aos-delay="100">
+                <div class="volunteer__form-content">
+                   <h4 class="title-animation pb-4">Update Your Profile</h4>
+                </div>
+                <form method="post" enctype="multipart/form-data" class="mt-20">
+                  {% csrf_token %}
+                  
+                  <!-- Title Field -->
+                  <div class="input-single">
+                    {{ form.username}}
+                    <i class="fa-solid fa-signature"></i>
+                    {% if form.username.errors %}
+                      <div class="text-danger">{{ form.username.errors }}</div>
+                    {% endif %}
+                  </div>
+
+                  <div class="input-single">
+                    {{ form.first_name}}
+                    <i class="fa-solid fa-heading"></i>
+                    {% if form.first_name.errors %}
+                      <div class="text-danger">{{ form.first_name.errors }}</div>
+                    {% endif %}
+                  </div>
+
+                  <div class="input-single">
+                    {{ form.last_name}}
+                    <i class="fa-solid fa-heading"></i>
+                    {% if form.last_name.errors %}
+                      <div class="text-danger">{{ form.last_name.errors }}</div>
+                    {% endif %}
+                  </div>
+                  
+                  <!-- Category Field -->
+                  <div class="input-single">
+                    {{ form.gender }}
+                    <i class="fa-solid fa-mars-and-venus-burst"></i>
+                    {% if form.gender.errors %}
+                      <div class="text-danger">{{ form.gender.errors }}</div>
+                    {% endif %}
+                  </div>
+                  
+                  <!-- Content Field -->
+                  <div class="input-single alter-input">
+                    {{ form.email }}
+                    <i class="fa-solid fa-square-envelope"></i>
+                    {% if form.email.errors %}
+                      <div class="text-danger">{{ form.email.errors }}</div>
+                    {% endif %}
+                  </div>
+                  
+                  <!-- File Field -->
+                  <div class="input-single">
+                    {{ form.photo }}
+                    <i class="fa-solid fa-id-badge"></i>
+                    {% if form.photo.errors %}
+                      <div class="text-danger">{{ form.photo.errors }}</div>
+                    {% endif %}
+                  </div>
+                  
+                  <div class="input-single">
+                    {{ form.bio}}
+                    <i class="fa-solid fa-id-card"></i>
+                    {% if form.bio.errors %}
+                      <div class="text-danger">{{ form.bio.errors }}</div>
+                    {% endif %}
+                  </div>
+
+                  <!-- Tags Field -->
+                  <div class="input-single">
+                    {{ form.location }}
+                    <i class="fa-solid fa-location-dot"></i>
+                    {% if form.location.errors %}
+                      <div class="text-danger">{{ form.location.errors }}</div>
+                    {% endif %}
+                  </div>
+                  
+                  <!-- Submit Button -->
+                  <div class="form-cta">
+                    <button type="submit" aria-label="submit post" title="submit post" class="btn--secondary" data-text="Update">
+                      <span>Update</span>
+                    </button>
+                  </div>
+                </form>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+ <!-- ==== / contact section end ==== -->
+
+{% include "footer.html" %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Add any extra JavaScript here if needed
+</script>
+{% endblock %}

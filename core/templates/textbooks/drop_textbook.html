@@ -1,0 +1,128 @@
+{% extends 'base_general.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+  .errorlist li {
+    color: red !important;
+  }
+  /* Example active class styling for nav if needed */
+  .navbar__item.active a {
+      color: #ffc071;
+      font-weight: bold;
+  }
+  /* Style for the map container */
+  #map {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 20px;
+  }
+  /* Style for drop location cards */
+  .drop-location-card {
+    margin-bottom: 15px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+  {% include "header.html" %}
+
+  <!-- ==== banner section start ==== -->
+  <section class="common-banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="common-banner__content text-center">
+            <h2 class="title-animation">Drop Textbook</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          Drop Textbook
+        </li>
+      </ol>
+    </nav>
+    <div class="banner-bg">
+      <img src="{% static 'images/banner/drop-book-banner-bg.jpg' %}" alt="Image">
+    </div>
+    <div class="sprade" data-aos="zoom-in" data-aos-duration="1000">
+      <img src="{% static 'images/sprade-base.png' %}" alt="Image" class="base-img">
+    </div>
+    <div class="line">
+      <img src="{% static 'images/line.png' %}" alt="Image">
+    </div>
+  </section>
+  <!-- ==== / banner section end ==== -->
+
+  <!-- ==== contact section start ==== -->
+  <section class="contact contact-main volunteer pt-120 pb-120">
+    <div class="container">
+       <div class="row gutter-40">
+          <div class="col-12 col-lg-12 col-xl-12">
+             <div class="contact__content">
+                <div class="section__header" data-aos="fade-up" data-aos-duration="1000">
+                   <span>Choose the nearest location</span>
+                   <h2 class="title-animation">Locations</h2>
+                </div>
+
+                <!-- ==== contact map start ==== -->
+                <div class="contact-map">
+                    <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                        <div class="map-inner" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                            <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.276617046195!2d103.8198367362123!3d1.3520838000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da19c55a9e39a1%3A0xf1a792b8d1825cd!2sSingapore!5e0!3m2!1sen!2ssg!4v1684000000000!5m2!1sen!2ssg"
+                            width="100%" height="800" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- ==== / contact map end ==== -->
+
+                <div class="row">
+                    {% if locations %}
+                        {% for location in locations %}
+                            <div class="topbar__item col-12 col-lg-4 mt-40">
+                                <div class="topbar__item-single" data-aos="fade-up" data-aos-duration="1000">
+                                  <div class="topbar__item-single__icon">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                  </div>
+                                  <div class="topbar__item-single__content">
+                                    <span>{{ location.name }}</span>
+                                    <p>{{ location.address }}</p>
+                                  </div>
+                                  <a class="offset-md-1 mt-20" href="{% url 'drop_textbook_form_update'  location.id %}">
+                                        <button aria-label="Select This Location" class="btn--primary">Select This Location
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                     {% else %}
+                       <div class="col-12">
+                         <p class="text-center">No drop locations available at this time.</p>
+                       </div>
+                     {% endif %}
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+  </section>
+  <!-- ==== / contact section end ==== -->
+
+{% include "footer.html" %}
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}

@@ -1,0 +1,228 @@
+<!-- templates/registration/register.html -->
+<!-- templates/registration/login.html -->
+{% extends 'base_general.html' %}
+{% load static %}
+
+{% block content %}
+    {% include "header.html" %}
+    <!-- ==== banner section start ==== -->
+    <section class="common-banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="common-banner__content text-center">
+                    <h2 class="title-animation">Create Account</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    Create Account
+                </li>
+            </ol>
+        </nav>
+        <div class="banner-bg">
+            <img src="{% static 'images/banner/donate-banner-bg.jpg' %}" alt="Image">
+        </div>
+        <div class="sprade" data-aos="zoom-in" data-aos-duration="1000">
+            <img src="{% static 'images/sprade-base.png' %}" alt="Image" class="base-img">
+        </div>
+        <div class="line">
+            <img src="{% static 'images/line.png' %}" alt="Image">
+        </div>
+        </section>
+        <!-- ==== / banner section end ==== -->
+        <!-- ==== authentication section start ==== -->
+        <div class="authentication pt-120 pb-120">
+            <div class="container">
+               <div class="row justify-content-center">
+                  <div class="col-12 col-lg-8 col-xl-6">
+                     <div class="authentication__wrapper">
+                        <div class="authentication__inner">
+                           <form method="post" class="needs-validation" >
+                              {% csrf_token %}
+                              <div class="row g-3">
+                                 <div class="col-md-6 input-single">
+                                    <label for="id_username">Username</label>
+                                    <div class="ic-group">
+                                       <input type="text" name="username" 
+                                              class="form-control" required>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6 input-single">
+                                    <label for="id_first_name">First Name</label>
+                                    <div class="ic-group">
+                                       <input type="text" name="first_name" 
+                                              class="form-control" required>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6 input-single">
+                                    <label for="id_last_name">Last Name</label>
+                                    <div class="ic-group">
+                                       <input type="text" name="last_name" 
+                                              class="form-control" required>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6 input-single">
+                                    <label for="id_gender">Gender</label>
+                                    <div class="ic-group">
+                                       <select name="gender" class="form-select" required>
+                                          <option value="">Choose...</option>
+                                          <option value="M">Male</option>
+                                          <option value="F">Female</option>
+                                          <option value="O">Other</option>
+                                       </select>
+                                    </div>
+                                 </div>
+                                 <div class="col-12 input-single">
+                                    <label for="id_email">Email Address</label>
+                                    <div class="ic-group">
+                                       <input type="email" name="email" 
+                                              class="form-control" required>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6 input-single">
+                                    <label for="id_password1">Password</label>
+                                    <div class="ic-group pass">
+                                       <input type="password" name="password1" 
+                                              class="form-control" required>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6 input-single mb-4">
+                                    <label for="id_password2">Confirm Password</label>
+                                    <div class="ic-group pass">
+                                       <input type="password" name="password2" 
+                                              class="form-control" required>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="section__content-cta mt-4">
+                                 <button type="submit" class="btn--secondary" 
+                                         data-text="Sign Up"><span>Sign Up</span></button>
+                              </div>
+                              <br>
+                              <br>
+                                {% if form.errors %}
+                                <div class="alert alert-danger mt-4">
+                                {{ form.non_field_errors }}
+                                </div>
+                                {% endif %}
+                           </form>
+                           </div>
+                        </div>
+                        <div class="auth-footer">
+                           <p>
+                              Already have an account?
+                              <a href="{% url 'login' %}">Log In</a>
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+        </section>
+     {% include "footer.html" %}
+ {% endblock %}
+ 
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Password validation
+    $('input[name="password2"]').on('keyup', function() {
+        if ($('input[name="password1"]').val() !== $(this).val()) {
+            $(this).addClass('is-invalid');
+        } else {
+            $(this).removeClass('is-invalid');
+        }
+    });
+});
+</script>
+{% endblock %}
+
+
+ {% comment %} 
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Create Account</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+                                <label for="id_username" class="form-label">User Name</label>
+                                <input type="text" name="username" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="id_first_name" class="form-label">First Name</label>
+                                <input type="text" name="first_name" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="id_last_name" class="form-label">Last Name</label>
+                                <input type="text" name="last_name" class="form-control" required>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="id_gender" class="form-label">Gender</label>
+                                <select name="gender" class="form-select" required>
+                                    <option value="">Choose...</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="id_email" class="form-label">Email Address</label>
+                                <input type="email" name="email" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="id_password1" class="form-label">Password</label>
+                                <input type="password" name="password1" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="id_password2" class="form-label">Confirm Password</label>
+                                <input type="password" name="password2" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+                        </div>
+                        <div class="text-center mt-3">
+                            Already have an account? <a href="{% url 'login' %}">Log In</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Password validation
+    $('input[name="password2"]').on('keyup', function() {
+        if ($('input[name="password1"]').val() !== $(this).val()) {
+            $(this).addClass('is-invalid');
+        } else {
+            $(this).removeClass('is-invalid');
+        }
+    });
+});
+</script>
+{% endblock %}
+{% endblock %} {% endcomment %}

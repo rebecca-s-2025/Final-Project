@@ -1,0 +1,41 @@
+<!-- templates/textbooks/browse.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h3>Available Textbooks</h3>
+        </div>
+        <div class="card-body">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for textbook in textbooks %}
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ textbook.title }}</h5>
+                            <p class="card-text">
+                                <small class="text-muted">ISBN: {{ textbook.isbn }}</small><br>
+                                Available: {{ textbook.stock }}
+                            </p>
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'textbook_request' textbook.id %}" 
+                               class="btn btn-success">
+                                Request Textbook
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        No textbooks available. Check back later!
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
